@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  web:
+    image: nginx:stable-alpine
+    scale: 5
+    volumes:
+      - ./nginx/data/services/log:/var/log/nginx
+  
+  proxy-server:
+    image: nginx:stable-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/data/proxy/log:/var/log/nginx
